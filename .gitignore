@@ -7,5 +7,10 @@ wheels/
 *.egg-info
 
 # Virtual environments
-.venv
-esmc-300m/
+.venv/
+
+# Local/generated artifacts
+.DS_Store
+models/esmc-*/
+embedding/esmc-*/*.pt
+results/

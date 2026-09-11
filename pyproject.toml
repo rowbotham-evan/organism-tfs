@@ -1,11 +1,14 @@
 [project]
 name = "ecoli-tfs"
 version = "0.1.0"
-description = "Add your description here"
+description = "Build bacterial TF datasets and ESMC embeddings"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
-    "huggingface-hub>=1.30.0",
+    "matplotlib>=3.11.1",
+    "requests>=2.34.2",
+    "scikit-learn>=1.7.2",
     "torch>=2.14.0",
     "transformers>=5.16.1",
+    "truststore>=0.10.4",
 ]
