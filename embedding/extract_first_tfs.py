@@ -9,7 +9,6 @@ import torch
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 MODEL_CONFIGS = {
-    "300m": {"name": "ESMC-300M", "slug": "esmc-300M", "width": 960},
     "600m": {"name": "ESMC-600M", "slug": "esmc-600M", "width": 1152},
 }
 DATASET_CONFIGS = {

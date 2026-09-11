@@ -2,7 +2,7 @@
 
 # Transcription Factor Datasets
 
-## E. Coli TF Dataset (*K-12 Strain*)
+## E. Coli TF Dataset (*K-12*)
 
 The dataset for E. Coli is found via a query to RegulonDB: 
 
@@ -43,7 +43,7 @@ Then the program post processes the data to get:
 
 ## Psuedomona Aerguinosa (*POA1*)
 
-The dataset for Psuedomona Aerguinosa is initally pulled from [MiST4.0](https://mistdb.com/mist/genomes/GCF_000006765.1). We pull the [output] domains](https://mistdb.com/mist/genomes/GCF_000006765.1), which contain 477 domains. 
+The dataset for Psuedomona Aerguinosa is initally pulled from [MiST4.0](https://mistdb.com/mist/genomes/GCF_000006765.1). We pull the [output domains](https://mistdb.com/mist/genomes/GCF_000006765.1), which contain 477 domains. 
 
 
 From our API call to Psuedomona Aerguinosa we extract:
@@ -57,6 +57,21 @@ Then utilizing those we query Uniprot. All of the domains that don't have a matc
 
 ## Halobacterium Salinarum ()
 
+ Slightly differing from the previous one, we instead take the union of transcription factors supplied by both [MiST4.0]( https://mistdb.com/mist/genomes/GCF_000006805.1) and [Uniprot](). 
+
+
+ For MiST4.0 we query: 
+1.
+2.
+3.
+
+
+For Uniprot we query:
+1.
+2.
+3.
+
+Then we aggregate the two datasets in a shared one. 
 
 
 ## Haloferax volcanii ()

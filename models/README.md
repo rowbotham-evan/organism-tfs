@@ -6,7 +6,6 @@ live under `embedding/`.
 
 | Path | Purpose |
 | --- | --- |
-| `esmc-300M/` | ESMC-300M checkpoint; produces a 960-value vector per amino acid. |
 | `esmc-600M/` | Hugging Face-native `biohub/ESMC-600M-hf` checkpoint; produces a 1,152-value vector per amino acid. |
 
 Each model directory contains:
@@ -21,6 +20,5 @@ Each model directory contains:
 Generate model-specific embeddings from the repository root:
 
 ```bash
-uv run python embedding/encode_all_tfs.py --model 300m
 uv run python embedding/encode_all_tfs.py --model 600m
 ```

@@ -10,12 +10,6 @@ from transformers import AutoModel, AutoTokenizer
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 MODEL_CONFIGS = {
-    "300m": {
-        "name": "ESMC-300M",
-        "slug": "esmc-300M",
-        "path": PROJECT_DIR / "models" / "esmc-300M",
-        "width": 960,
-    },
     "600m": {
         "name": "ESMC-600M",
         "slug": "esmc-600M",
@@ -28,7 +22,7 @@ DATASET_CONFIGS = {
         "path": (
             PROJECT_DIR
             / "data"
-            / "ecoli"
+            / "Escherichia_coli_K-12"
             / "data"
             / "regulon_tf_dataset_with_aa_sequences.csv"
         ),
@@ -44,7 +38,7 @@ DATASET_CONFIGS = {
         "path": (
             PROJECT_DIR
             / "data"
-            / "nrc1"
+            / "Halobacterium_salinarum_NRC-1"
             / "data"
             / "halobacterium_salinarum_nrc1_tf_dataset.csv"
         ),
@@ -64,7 +58,7 @@ DATASET_CONFIGS = {
         "path": (
             PROJECT_DIR
             / "data"
-            / "hvolc"
+            / "Haloferax_volcanii_DS2"
             / "data"
             / "haloferax_volcanii_ds2_tf_dataset.csv"
         ),
@@ -84,7 +78,7 @@ DATASET_CONFIGS = {
         "path": (
             PROJECT_DIR
             / "data"
-            / "pao1"
+            / "Pseudomonas_aeruginosa_PAO1"
             / "data"
             / "pseudomonas_aeruginosa_pao1_tf_dataset.csv"
         ),
@@ -108,8 +102,8 @@ def parse_args():
     parser.add_argument(
         "--model",
         choices=MODEL_CONFIGS,
-        default="300m",
-        help="ESMC checkpoint to use (default: 300m)",
+        default="600m",
+        help="ESMC checkpoint to use (default: 600m)",
     )
     parser.add_argument(
         "--dataset",

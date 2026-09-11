@@ -115,6 +115,7 @@ def main():
     output = (
         PROJECT_DIR
         / "results"
+        / "dimensionality_reduction"
         / f"{MODEL['name']}_mean_pooled_protein_pca.png"
     )
     output.parent.mkdir(parents=True, exist_ok=True)

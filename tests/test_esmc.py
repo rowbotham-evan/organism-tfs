@@ -4,12 +4,12 @@ from pathlib import Path
 import torch
 from transformers import AutoModel, AutoTokenizer
 
-MODEL_WIDTHS = {"300m": 960, "600m": 1152}
+MODEL_WIDTHS = {"600m": 1152}
 
 
 def main():
     parser = argparse.ArgumentParser(description="Smoke-test a local ESMC model")
-    parser.add_argument("--model", choices=MODEL_WIDTHS, default="300m")
+    parser.add_argument("--model", choices=MODEL_WIDTHS, default="600m")
     args = parser.parse_args()
 
     model_path = (

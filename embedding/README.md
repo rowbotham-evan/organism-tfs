@@ -8,24 +8,19 @@ UniProt datasets.
 | `encode_all_tfs.py` | Loads the selected model from `models/`, embeds every amino acid in every TF sequence, removes special-token vectors, validates the model-specific width, and saves the tensors in the matching subdirectory here. |
 | `extract_first_tfs.py` | Exports the first raw E. coli and PAO1 TF embeddings as model-specific residue-level CSV files without PCA. |
 | `analyze_600m_clusters.py` | For each organism cluster of mean-pooled TF vectors: the mean vector (saved as CSV), the RMS in the cluster, and the pairwise cosine similarity between mean vectors. |
-| `esmc-300M/` | Contains embeddings generated with ESMC-300M. |
 | `esmc-600M/` | Contains embeddings generated with ESMC-600M. |
 
-Choose the model and dataset with flags:
+Choose the dataset with flags:
 
 ```bash
-uv run python embedding/encode_all_tfs.py --model 300m
 uv run python embedding/encode_all_tfs.py --model 600m
-uv run python embedding/encode_all_tfs.py --dataset pao1 --model 300m
 uv run python embedding/encode_all_tfs.py --dataset pao1 --model 600m
 uv run python embedding/encode_all_tfs.py --dataset nrc1 --model 600m
 uv run python embedding/extract_first_tfs.py
-uv run python embedding/analyze_600m_embeddings.py
+uv run python embedding/analyze_600m_clusters.py
 ```
 
-The 300M model produces 960 values per residue and writes
-`embedding/esmc-300M/esmc-300M_all_raw_embeddings.pt`. The 600M model produces
-1,152 values per residue and writes
+ESMC-600M produces 1,152 values per residue and writes
 `embedding/esmc-600M/esmc-600M_all_raw_embeddings.pt`.
 
 *P. aeruginosa* PAO1 outputs use the same model directories and include
