@@ -26,7 +26,9 @@ uv run python embedding/encode_all_tfs.py --dataset nrc1 --model 600m
 uv run python visualization/plot_tf_sequence_length_distribution.py
 uv run python visualization/plot_raw_embedding_pca.py
 uv run python visualization/plot_pooled_embedding_pca.py
+uv run python visualization/plot_pooled_embedding_pca_components.py
 uv run python visualization/plot_pooled_embedding_tsne.py
+uv run python visualization/plot_pooled_embedding_umap.py
 uv run python visualization/plot_tf_nearest_neighbour_distances.py
 uv run python embedding/analyze_600m_clusters.py
 ```
@@ -37,12 +39,15 @@ uv run python embedding/analyze_600m_clusters.py
    b-number. The cleaned output has one row per unique TF protein.
 2. `get_aa_seq_from_uniprot.py` looks up each accession directly in UniProtKB
    and appends the canonical complete sequence.
-3. `pao1/get_mist_signal_genes.py` downloads the P. aeruginosa PAO1 genes that
-   MiST4 classifies as having a DNA-binding output domain (its transcription
-   factor category, including sigma factors). Then
-   `pao1/get_pseudomonas_aeruginosa_pao1_tf_dataset.py` looks each MiST locus tag
-   up in UniProtKB for its sequence and keeps it only if UniProt also annotates
-   GO:0003700, so the dataset is the intersection of MiST4 and UniProt.
+3. `pao1/get_mist_signal_genes.py` collects the P. aeruginosa PAO1 genes on
+   MiST4's `kind=output`, `function=DNA binding` page (its transcription factor
+   category, including sigma factors), with each gene's locus tag and the
+   genome's organism ID. `pao1/get_pseudomonas_aeruginosa_pao1_tf_dataset.py`
+   then queries UniProtKB for `(organism_id) AND (gene:<locus tag>) AND
+   (go:0003700)`, re-checks the organism, exact locus tag and TF GO term
+   (GO:0003700 or one of its child terms from QuickGO) on every returned entry,
+   and saves the sequences. MiST4 has no GO annotations; GO:0003700 is the
+   criterion the pipeline adds.
 3b. `nrc1/get_network_portal_tfs.py` downloads the Baliga lab catalog from the
    ISB Network Portal, then `nrc1/get_halobacterium_salinarum_nrc1_tf_dataset.py`
    selects NRC-1 proteins carrying GO:0003700 or a Pfam helix-turn-helix family,
@@ -63,9 +68,16 @@ uv run python embedding/analyze_600m_clusters.py
    50-amino-acid bins as one stacked panel with a shared x-axis.
 7. `plot_pooled_embedding_pca.py` mean-pools each TF into one vector and runs
    PCA over proteins rather than residues.
+   `plot_pooled_embedding_pca_components.py` computes the first eight
+   components of that PCA and plots each new one against the previous
+   (PC2-PC3 through PC7-PC8), reporting how much of each component's variance
+   organism and domain of life explain.
    `plot_pooled_embedding_tsne.py` runs t-SNE on the same pooled vectors
    (50 PCs, perplexity 30, fixed seed) and reports how often each TF's nearest
    neighbours in the original embedding space come from its own organism.
+   `plot_pooled_embedding_umap.py` runs UMAP on the same pooled vectors
+   (50 PCs, 15 neighbours, min_dist 0.1, fixed seed) and reports how well the
+   2-d layout preserves each TF's original nearest neighbours.
 8. `plot_tf_nearest_neighbour_distances.py` gives each TF's Euclidean distance
    to the closest other TF in the same organism, as one stacked histogram panel.
 9. `analyze_600m_clusters.py` reports each organism cluster's mean vector, its
@@ -84,8 +96,8 @@ The primary tables are:
 - `data/pao1/data/pseudomonas_aeruginosa_pao1_mist_dna_binding_genes.csv`: MiST4
   signal genes for GCF_000006765.1 with `kind=output` and `function=DNA binding`.
 - `data/pao1/data/pseudomonas_aeruginosa_pao1_tf_dataset.csv`: MiST4 DNA-binding
-  genes whose UniProtKB entry also matches
-  `(organism_id:208964) AND (go:0003700) AND (fragment:false)`, with sequences.
+  genes whose UniProtKB entry matches the MiST organism ID, the locus tag, and
+  GO:0003700 or a child term, with sequences.
 - `data/nrc1/data/halobacterium_salinarum_nrc1_tf_dataset.csv`: complete
   NRC-1 proteins matching
   `(organism_id:64091) AND (go:0003700) AND (fragment:false)`.

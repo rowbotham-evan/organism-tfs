@@ -11,4 +11,5 @@ dependencies = [
     "torch>=2.14.0",
     "transformers>=5.16.1",
     "truststore>=0.10.4",
+    "umap-learn>=0.5.12",
 ]
