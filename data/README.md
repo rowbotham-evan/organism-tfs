@@ -15,16 +15,16 @@ The ID: RDBECOLITF0001 specifies:
 - TF = transcription factor
 - 0001 = ? code
 
-From the TF dataset in Regulon we extract two important fields:
-1. geneCodingForTF 
-2. geneBnumberCodingForTF
+From the TF dataset in Regulon we extract these fields (the important two are bolded):
+1. **geneCodingForTF**
+2. **geneBnumberCodingForTF**
 3. id 
 4. name
 
 
 
 
-The B number obtained by (2) is then used to query RegulonDB again to get the GeneproductIdenitifers to get the otherDbsProductIDs
+The B number obtained by (2) is then used to query RegulonDB again to get the GeneproductIdenitifers. Then using the GeneproductIdenitifers we can find the corresponding otherDbsProductIDs
 
 This otherDbsProductIDs contains the identifier we use to query the API of Uniprot for the amino acid sequences of a given transcription factor. 
 
@@ -43,7 +43,7 @@ Then the program post processes the data to get:
 
 ## Psuedomona Aerguinosa (*POA1*)
 
-The dataset for Psuedomona Aerguinosa is initally pulled from (MiST4.0)[https://mistdb.com/mist/genomes/GCF_000006765.1]. We pull the (output domains)[https://mistdb.com/mist/genomes/GCF_000006765.1], which contain 477 domains. 
+The dataset for Psuedomona Aerguinosa is initally pulled from [MiST4.0](https://mistdb.com/mist/genomes/GCF_000006765.1). We pull the [output] domains](https://mistdb.com/mist/genomes/GCF_000006765.1), which contain 477 domains. 
 
 
 From our API call to Psuedomona Aerguinosa we extract:
